@@ -17,5 +17,5 @@ public:
     ConfigsListHandler(ConfigsListPtr);
     virtual ~ConfigsListHandler();
 
-    ConfigsListPtr getConfigsList() const;
+    ConfigsListPtr getConfigsListPtr() const;
 };

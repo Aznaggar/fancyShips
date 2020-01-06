@@ -3,9 +3,12 @@
 ConfigsListHandler::ConfigsListHandler(ConfigsListPtr configsListPtr) :
     configsListPtr(configsListPtr) {}
 
-ConfigsListHandler::~ConfigsListHandler() {}
+ConfigsListHandler::~ConfigsListHandler()
+{
+    this->configsListPtr.reset();
+}
 
-ConfigsListPtr ConfigsListHandler::getConfigsList() const
+ConfigsListPtr ConfigsListHandler::getConfigsListPtr() const
 {
     return this->configsListPtr;
 }

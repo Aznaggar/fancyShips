@@ -7,28 +7,33 @@
 #include "position.h"
 #include "shipType.h"
 
-namespace ship
+namespace game
 {
-  namespace dir
-  {
-    const char VERT = 'v';
-    const char HOR = 'h';
-  }
-  enum class boundoption
-  {
-    UPPER,
-    BOTTOM,
-    LEFT,
-    RIGHT
-  };
-  enum class corneroption
-  {
-    UPPER_LEFT,
-    UPPER_RIGHT,
-    BOTTOM_LEFT,
-    BOTTOM_RIGHT
-  };
+    namespace ship
+    {
+        namespace dir
+        {
+            const char VERT = 'v';
+            const char HOR = 'h';
+        }
+        enum class boundoption
+        {
+            UPPER,
+            BOTTOM,
+            LEFT,
+            RIGHT
+        };
+        enum class corneroption
+        {
+            UPPER_LEFT,
+            UPPER_RIGHT,
+            BOTTOM_LEFT,
+            BOTTOM_RIGHT
+        };
+    }
 }
+
+using namespace game;
 
 class Ship
 {

@@ -11,7 +11,7 @@ class Subject
 private:
     std::list<ObserverPtr> observersList;
 protected:
-    void update(const std::string& input);
+    void update(const std::string&);
 public:
     void addObserver(ObserverPtr);
     void removeObserver(ObserverPtr);

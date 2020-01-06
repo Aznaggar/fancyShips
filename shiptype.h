@@ -2,25 +2,30 @@
 #include <string>
 #include <list>
 
-namespace shiptype
+namespace game
 {
-  namespace name
-  {
-    const std::string CARRIER = "Carrier";
-    const std::string BATTLESHIP = "Battleship";
-    const std::string CRUISER = "Cruiser";
-    const std::string SUBMARINE = "Submarine";
-    const std::string DESTROYER = "Destroyer";
-  }
-  namespace lenght
-  {
-    const int CARRIER = 5;
-    const int BATTLESHIP = 4;
-    const int CRUISER = 3;
-    const int SUBMARINE = 2;
-    const int DESTROYER = 1;
-  }
+    namespace shiptype
+    {
+        namespace name
+        {
+            const std::string CARRIER = "Carrier";
+            const std::string BATTLESHIP = "Battleship";
+            const std::string CRUISER = "Cruiser";
+            const std::string SUBMARINE = "Submarine";
+            const std::string DESTROYER = "Destroyer";
+        }
+        namespace lenght
+        {
+            const int CARRIER = 5;
+            const int BATTLESHIP = 4;
+            const int CRUISER = 3;
+            const int SUBMARINE = 2;
+            const int DESTROYER = 1;
+        }
+    }
 }
+
+using namespace game;
 
 class ShipType
 {

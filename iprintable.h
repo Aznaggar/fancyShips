@@ -1,11 +1,11 @@
 #pragma once
 #include <iostream>
 
-#include "gameconstants.h"
+#include "gamestatehandler.h"
 
 class IPrintable
 {
 public:
     virtual ~IPrintable() {}
-    virtual void print(const game::state&) = 0;
+    virtual void print() const = 0;
 };

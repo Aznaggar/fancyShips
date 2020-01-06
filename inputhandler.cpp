@@ -2,10 +2,12 @@
 
 void InputHandler::getObservers(const Game& game)
 {
+    Subject::addObserver(game.getGameStateControllerPtr());
     Subject::addObserver(game.getBoardControllerPtr());
     Subject::addObserver(game.getConfigControllerPtr());
-    Subject::addObserver(game.getDeploymentControllerPtr());
-    Subject::addObserver(game.getBattleControllerPtr());
+    Subject::addObserver(game.getShipsListControllerPtr());
+    Subject::addObserver(game.getShotsListControllerPtr());
+    Subject::addObserver(game.getMsgControllerPtr());
 }
 
 void InputHandler::readInput()

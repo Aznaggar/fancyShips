@@ -44,7 +44,7 @@ unsigned int Board::getColsNum() const
     return result;
 }
 
-void Board::addEmptyRows(const unsigned int rowsNum)
+void Board::addRows(const unsigned int rowsNum)
 {
     const unsigned int endRow = this->getRowsNum();
     const unsigned int endCol = this->getColsNum();
@@ -60,7 +60,7 @@ void Board::addEmptyRows(const unsigned int rowsNum)
     }
 }
 
-void Board::addEmptyCols(const unsigned int colsNum)
+void Board::addCols(const unsigned int colsNum)
 {
     const unsigned int endRow = this->getRowsNum();
     const unsigned int endCol = this->getColsNum();
@@ -135,7 +135,7 @@ void Board::resizeCols(const unsigned int cols)
 
     if (cols > endCol)
     {
-        this->addEmptyCols(cols - endCol);
+        this->addCols(cols - endCol);
     }
     else if (cols < endCol)
     {
@@ -149,7 +149,7 @@ void Board::resize(const unsigned int rows, const unsigned int cols)
 
     if (rows > endRow)
     {
-        this->addEmptyRows(rows - endRow);
+        this->addRows(rows - endRow);
         resizeCols(cols);
     }
     else if(rows < endRow)
@@ -160,18 +160,6 @@ void Board::resize(const unsigned int rows, const unsigned int cols)
     else
     {
         resizeCols(cols);
-    }
-}
-
-void Board::print() const
-{
-    for (unsigned int i = 0; i < this->matrix.size(); ++i)
-    {
-        for (unsigned int j = 0; j < this->matrix[i].size(); ++j)
-        {
-            std::cout << 0;
-        }
-        std::cout << '\n';
     }
 }
 

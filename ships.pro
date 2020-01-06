@@ -14,12 +14,17 @@ SOURCES += main.cpp \
     shipslisthandler.cpp \
     game.cpp \
     configcontroller.cpp \
-    deploymentcontroller.cpp \
-    battlecontroller.cpp \
     boardcontroller.cpp \
     subject.cpp \
     inputhandler.cpp \
-    msgcontroller.cpp
+    msgcontroller.cpp \
+    gamestatecontroller.cpp \
+    gamestatehandler.cpp \
+    shipslistcontroller.cpp \
+    shotslistcontroller.cpp \
+    shotslisthandler.cpp \
+    boardhandler.cpp \
+    msghandler.cpp
 
 HEADERS += \
     shiptype.h \
@@ -32,12 +37,17 @@ HEADERS += \
     shipslisthandler.h \
     game.h \
     configcontroller.h \
-    deploymentcontroller.h \
     iprintable.h \
-    battlecontroller.h \
     boardcontroller.h \
     observer.h \
     subject.h \
     inputhandler.h \
     msgcontroller.h \
-    gameconstants.h
+    gameconstants.h \
+    gamestatecontroller.h \
+    gamestatehandler.h \
+    shipslistcontroller.h \
+    shotslistcontroller.h \
+    shotslisthandler.h \
+    boardhandler.h \
+    msghandler.h

@@ -2,14 +2,17 @@
 
 ShipsListHandler::ShipsListHandler(ShipsListPtr shipsListPtr) : shipsListPtr(shipsListPtr) {}
 
-ShipsListHandler::~ShipsListHandler() {}
+ShipsListHandler::~ShipsListHandler()
+{
+    this->shipsListPtr.reset();
+}
 
 void ShipsListHandler::setShipList(ShipsListPtr shipsListPtr)
 {
     this->shipsListPtr = shipsListPtr;
 }
 
-ShipsListPtr ShipsListHandler::getShipsList() const
+ShipsListPtr ShipsListHandler::getShipsListPtr() const
 {
     return this->shipsListPtr;
 }

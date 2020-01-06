@@ -15,7 +15,7 @@ public:
   virtual ~ShipsListHandler();
 
   void setShipList(ShipsListPtr);
-  ShipsListPtr getShipsList() const;
+  ShipsListPtr getShipsListPtr() const;
 
   void addShip(const Ship& ship);
 };

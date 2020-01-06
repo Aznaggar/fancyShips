@@ -12,7 +12,7 @@ void Subject::removeObserver(ObserverPtr observer)
 
 void Subject::update(const std::string& input)
 {
-    for (auto& observer : this->observersList)
+    for (ObserverPtr& observer : this->observersList)
     {
         observer->onUpdate(input);
     }

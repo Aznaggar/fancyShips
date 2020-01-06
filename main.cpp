@@ -1,4 +1,3 @@
-#include "game.h"
 #include "inputhandler.h"
 
 int main()

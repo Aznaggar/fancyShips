@@ -3,15 +3,19 @@
 
 #include "position.h"
 #include "board.h"
-
-namespace mast
+namespace game
 {
-  enum class state
-  {
-    FLOATING,
-    SINKING
-  };
+    namespace mast
+    {
+        enum class state
+        {
+        FLOATING,
+        SINKING
+        };
+    }
 }
+
+using namespace game;
 
 class Mast
 {

@@ -1,33 +1,54 @@
 #pragma once
 
+#include "gamestatecontroller.h"
 #include "boardcontroller.h"
 #include "configcontroller.h"
-#include "deploymentcontroller.h"
-#include "battlecontroller.h"
-#include "gameconstants.h"
+#include "shipslistcontroller.h"
+#include "shotslistcontroller.h"
+#include "msgcontroller.h"
+
+namespace game
+{
+    namespace screen
+    {
+      namespace clear
+      {
+        const std::string COMMAND = "\033[2J\033[0;0H";
+        const bool ENABLED = true;
+        const bool DISABLED = false;
+      }
+    }
+}
 
 class Game
 {
 private:
-    game::state state;
+    GameStatePtr gameStatePtr;
     BoardPtr boardPtr;
-    ShipsListPtr shipsListPtr;
     ConfigsListPtr configsListPtr;
+    ShipsListPtr shipsListPtr;
+    ShotsListPtr shotsListPtr;
+    MsgPtr msgPtr;
 
+    GameStateControllerPtr gameStateControllerPtr;
     BoardControllerPtr boardControllerPtr;
     ConfigControllerPtr configControllerPtr;
-    DeploymentControllerPtr deploymentControllerPtr;
-    BattleControllerPtr battleControllerPtr;
+    ShipsListControllerPtr shipsListControllerPtr;
+    ShotsListControllerPtr shotsListControllerPtr;
+    MsgControllerPtr msgControllerPtr;
 
 public:
     Game();
     void run();
     bool isRunning() const;
 
+    GameStateControllerPtr getGameStateControllerPtr() const;
     BoardControllerPtr getBoardControllerPtr() const;
     ConfigControllerPtr getConfigControllerPtr() const;
-    DeploymentControllerPtr getDeploymentControllerPtr() const;
-    BattleControllerPtr getBattleControllerPtr() const;
+    ShipsListControllerPtr getShipsListControllerPtr() const;
+    ShotsListControllerPtr getShotsListControllerPtr() const;
+    MsgControllerPtr getMsgControllerPtr() const;
+
 };
 
 // std::make_tuple(1, 2, ship::dir::HOR, 3),

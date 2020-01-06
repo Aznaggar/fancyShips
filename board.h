@@ -8,21 +8,19 @@ class Position;
 
 using PosMatrix = std::vector<std::vector<Position>>;
 
-namespace board
+namespace game
 {
-    namespace size
+    namespace board
     {
-        const unsigned int DEFAULT_ROWS = 10;
-        const unsigned int DEFAULT_COLS = 10;
-    }
-    namespace sign
-    {
-        const char EMPTY = '.';
-        const char MAST = '$';
-        const char HIDDEN = '*';
-        const char HIT = 'x';
+        namespace size
+        {
+            const unsigned int DEFAULT_ROWS = 10;
+            const unsigned int DEFAULT_COLS = 10;
+        }
     }
 }
+
+using namespace game;
 
 class Board
 {
@@ -30,8 +28,8 @@ private:
     PosMatrix matrix;
     void initMatrix();
 
-    void addEmptyCols(const unsigned int);
-    void addEmptyRows(const unsigned int);
+    void addCols(const unsigned int);
+    void addRows(const unsigned int);
 
     void removeRows(const unsigned int);
     void removeCols(const unsigned int);
@@ -46,7 +44,6 @@ public:
     unsigned int getColsNum() const;
 
     void resize(const unsigned int rows, const unsigned int cols);
-    void print() const;
 };
 
 using BoardPtr = std::shared_ptr<Board>;
