@@ -1,4 +1,6 @@
 #pragma once
+#include <memory>
+#include <list>
 
 #include "shipType.h"
 
@@ -34,3 +36,6 @@ public:
     bool isTypeFullyDeployed() const;
     const ShipType& getType() const;
 };
+
+using Config = ShipTypeConfig;
+using ConfigsListPtr = std::shared_ptr<std::list<Config>>;

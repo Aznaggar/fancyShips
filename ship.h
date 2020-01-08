@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include <list>
+#include <memory>
 
 #include "mast.h"
 #include "position.h"
@@ -68,3 +69,5 @@ public:
 
     bool isOnBoard(const Board&) const;
 };
+
+using ShipsListPtr = std::shared_ptr<std::list<Ship>>;

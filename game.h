@@ -1,11 +1,11 @@
 #pragma once
 
-#include "gamestatecontroller.h"
-#include "boardcontroller.h"
-#include "configcontroller.h"
+#include "gamestatehandler.h"
+#include "boardhandler.h"
+#include "configslisthandler.h"
 #include "shipslistcontroller.h"
 #include "shotslistcontroller.h"
-#include "msgcontroller.h"
+#include "msghandler.h"
 
 namespace game
 {
@@ -30,24 +30,24 @@ private:
     ShotsListPtr shotsListPtr;
     MsgPtr msgPtr;
 
-    GameStateControllerPtr gameStateControllerPtr;
-    BoardControllerPtr boardControllerPtr;
-    ConfigControllerPtr configControllerPtr;
+    GameStateHandlerPtr gameStateHandlerPtr;
+    BoardHandlerPtr boardHandlerPtr;
+    ConfigsListHandlerPtr configsListHandlerPtr;
     ShipsListControllerPtr shipsListControllerPtr;
     ShotsListControllerPtr shotsListControllerPtr;
-    MsgControllerPtr msgControllerPtr;
+    MsgHandlerPtr msgHandlerPtr;
 
 public:
     Game();
     void run();
     bool isRunning() const;
 
-    GameStateControllerPtr getGameStateControllerPtr() const;
-    BoardControllerPtr getBoardControllerPtr() const;
-    ConfigControllerPtr getConfigControllerPtr() const;
+    GameStateHandlerPtr getGameStateHandlerPtr() const;
+    BoardHandlerPtr getBoardHandlerPtr() const;
+    ConfigsListHandlerPtr getConfigsListHandlerPtr() const;
     ShipsListControllerPtr getShipsListControllerPtr() const;
     ShotsListControllerPtr getShotsListControllerPtr() const;
-    MsgControllerPtr getMsgControllerPtr() const;
+    MsgHandlerPtr getMsgHandlerPtr() const;
 
 };
 

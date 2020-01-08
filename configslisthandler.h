@@ -1,21 +1,26 @@
 #pragma once
-#include <memory>
+
 #include <list>
 
 #include "shiptypeconfig.h"
+#include "gamestatehandler.h"
+#include "observer.h"
 
-using Config = ShipTypeConfig;
-using ConfigsListPtr = std::shared_ptr<std::list<Config>>;
-
-class ConfigsListHandler
+class ConfigsListHandler : public Observer
 {
 private:
     ConfigsListPtr configsListPtr;
-protected:
-    void addConfig(const Config&);
-public:
-    ConfigsListHandler(ConfigsListPtr);
-    virtual ~ConfigsListHandler();
+    GameStatePtr gameStatePtr;
 
     ConfigsListPtr getConfigsListPtr() const;
+    void addConfig(const Config&);
+public:
+    ConfigsListHandler(ConfigsListPtr,
+                       GameStatePtr);
+    ~ConfigsListHandler();
+
+    void onUpdate(const std::string&) override;
+
 };
+
+using ConfigsListHandlerPtr = std::shared_ptr<ConfigsListHandler>;

@@ -13,12 +13,8 @@ SOURCES += main.cpp \
     configslisthandler.cpp \
     shipslisthandler.cpp \
     game.cpp \
-    configcontroller.cpp \
-    boardcontroller.cpp \
     subject.cpp \
     inputhandler.cpp \
-    msgcontroller.cpp \
-    gamestatecontroller.cpp \
     gamestatehandler.cpp \
     shipslistcontroller.cpp \
     shotslistcontroller.cpp \
@@ -36,15 +32,11 @@ HEADERS += \
     configslisthandler.h \
     shipslisthandler.h \
     game.h \
-    configcontroller.h \
     iprintable.h \
-    boardcontroller.h \
     observer.h \
     subject.h \
     inputhandler.h \
-    msgcontroller.h \
     gameconstants.h \
-    gamestatecontroller.h \
     gamestatehandler.h \
     shipslistcontroller.h \
     shotslistcontroller.h \

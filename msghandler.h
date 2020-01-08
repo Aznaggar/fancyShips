@@ -1,6 +1,8 @@
 #pragma once
-#include <memory>
-#include <string>
+
+#include "gamestatehandler.h"
+#include "observer.h"
+#include "iprintable.h"
 
 namespace game
 {
@@ -18,16 +20,28 @@ namespace game
 
 using MsgPtr = std::shared_ptr<std::string>;
 
-class MsgHandler
+class MsgHandler :
+        private GameStateHandler,
+        public Observer,
+        public IPrintable
 {
 private:
     MsgPtr msgPtr;
-protected:
-    void setMsgPtr(const std::string&);
-    void setMsgPtr(MsgPtr);
+    GameStatePtr gameStatePtr;
+
 public:
-    MsgHandler(MsgPtr);
-    virtual ~MsgHandler();
+    MsgHandler(MsgPtr, GameStatePtr);
+    ~MsgHandler();
+
+    void print() const override;
+    void onUpdate(const std::string&) override;
 
     MsgPtr getMsgPtr() const;
+    const std::string& getMsg() const;
+    const game::state& getGameState() const;
+
+    void setMsgPtr(const std::string&);
+    void setMsgPtr(MsgPtr);
 };
+
+using MsgHandlerPtr = std::shared_ptr<MsgHandler>;

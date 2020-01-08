@@ -8,9 +8,19 @@ GameStateHandler::~GameStateHandler()
     this->gameStatePtr.reset();
 }
 
+void GameStateHandler::onUpdate(const std::string& input)
+{
+    //@TODO
+}
+
 GameStatePtr GameStateHandler::getGameStatePtr() const
 {
     return this->gameStatePtr;
+}
+
+const game::state& GameStateHandler::getGameState() const
+{
+    return *this->gameStatePtr;
 }
 
 void GameStateHandler::setGameStatePtr(const game::state& state)

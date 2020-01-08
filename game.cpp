@@ -10,12 +10,12 @@ Game::Game() :
 
 void Game::run()
 {
-    this->gameStateControllerPtr = std::make_shared<GameStateController>(this->gameStatePtr);
-    this->boardControllerPtr = std::make_shared<BoardController>(this->boardPtr,
-                                                                 this->shipsListPtr,
-                                                                 this->gameStatePtr);
-    this->configControllerPtr = std::make_shared<ConfigController>(this->configsListPtr,
-                                                                   this->gameStatePtr);
+    this->gameStateHandlerPtr = std::make_shared<GameStateHandler>(this->gameStatePtr);
+    this->boardHandlerPtr = std::make_shared<BoardHandler>(this->boardPtr,
+                                                           this->shipsListPtr,
+                                                           this->gameStatePtr);
+    this->configsListHandlerPtr = std::make_shared<ConfigsListHandler>(this->configsListPtr,
+                                                                       this->gameStatePtr);
     this->shipsListControllerPtr = std::make_shared<ShipsListController>(this->shipsListPtr,
                                                                          this->configsListPtr,
                                                                          this->gameStatePtr,
@@ -23,8 +23,8 @@ void Game::run()
     this->shotsListControllerPtr = std::make_shared<ShotsListController>(this->shotsListPtr,
                                                                          this->shipsListPtr,
                                                                          this->gameStatePtr);
-    this->msgControllerPtr = std::make_shared<MsgController>(this->msgPtr,
-                                                             this->gameStatePtr);
+    this->msgHandlerPtr = std::make_shared<MsgHandler>(this->msgPtr,
+                                                       this->gameStatePtr);
 }
 
 bool Game::isRunning() const
@@ -32,19 +32,19 @@ bool Game::isRunning() const
     return *this->gameStatePtr != game::state::END;
 }
 
-GameStateControllerPtr Game::getGameStateControllerPtr() const
+GameStateHandlerPtr Game::getGameStateHandlerPtr() const
 {
-    return this->gameStateControllerPtr;
+    return this->gameStateHandlerPtr;
 }
 
-BoardControllerPtr Game::getBoardControllerPtr() const
+BoardHandlerPtr Game::getBoardHandlerPtr() const
 {
-    return this->boardControllerPtr;
+    return this->boardHandlerPtr;
 }
 
-ConfigControllerPtr Game::getConfigControllerPtr() const
+ConfigsListHandlerPtr Game::getConfigsListHandlerPtr() const
 {
-    return this->configControllerPtr;
+    return this->configsListHandlerPtr;
 }
 
 ShipsListControllerPtr Game::getShipsListControllerPtr() const
@@ -56,7 +56,7 @@ ShotsListControllerPtr Game::getShotsListControllerPtr() const
     return this->shotsListControllerPtr;
 }
 
-MsgControllerPtr Game::getMsgControllerPtr() const
+MsgHandlerPtr Game::getMsgHandlerPtr() const
 {
-    return this->msgControllerPtr;
+    return this->msgHandlerPtr;
 }

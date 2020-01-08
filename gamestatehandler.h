@@ -1,6 +1,8 @@
 #pragma once
 #include <memory>
 
+#include "observer.h"
+
 namespace game
 {
   enum class state
@@ -17,7 +19,7 @@ namespace game
 
 using GameStatePtr = std::shared_ptr<game::state>;
 
-class GameStateHandler
+class GameStateHandler : public Observer
 {
 private:
     GameStatePtr gameStatePtr;
@@ -26,7 +28,12 @@ protected:
     void setGameStatePtr(const game::state&);
 public:
     GameStateHandler(GameStatePtr);
-    virtual ~GameStateHandler();
+    ~GameStateHandler();
+
+    void onUpdate(const std::string&) override;
 
     GameStatePtr getGameStatePtr() const;
+    const game::state& getGameState() const;
 };
+
+using GameStateHandlerPtr = std::shared_ptr<GameStateHandler>;
