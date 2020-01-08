@@ -1,16 +1,29 @@
 #include "configslisthandler.h"
 
-ConfigsListHandler::ConfigsListHandler(ConfigsListPtr configsListPtr) :
-    configsListPtr(configsListPtr) {}
+ConfigsListHandler::ConfigsListHandler(ConfigsListPtr configsListPtr,
+                                       GameStatePtr gameStatePtr) :
+    configsListPtr(configsListPtr),
+    gameStatePtr(gameStatePtr) {}
 
 ConfigsListHandler::~ConfigsListHandler()
 {
     this->configsListPtr.reset();
+    this->gameStatePtr.reset();
 }
 
-ConfigsListPtr ConfigsListHandler::getConfigsListPtr() const
+void ConfigsListHandler::onUpdate(const std::string& input)
 {
-    return this->configsListPtr;
+    //@TODO
+}
+
+const std::list<Config>& ConfigsListHandler::getConfigsList() const
+{
+    return *this->configsListPtr;
+}
+
+const game::state& ConfigsListHandler::getGameState() const
+{
+    return *this->gameStatePtr;
 }
 
 void ConfigsListHandler::addConfig(const Config& config)

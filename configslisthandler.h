@@ -1,7 +1,5 @@
 #pragma once
 
-#include <list>
-
 #include "shiptypeconfig.h"
 #include "gamestatehandler.h"
 #include "observer.h"
@@ -12,8 +10,11 @@ private:
     ConfigsListPtr configsListPtr;
     GameStatePtr gameStatePtr;
 
-    ConfigsListPtr getConfigsListPtr() const;
+    const std::list<Config>& getConfigsList() const;
+    const game::state& getGameState() const;
+
     void addConfig(const Config&);
+
 public:
     ConfigsListHandler(ConfigsListPtr,
                        GameStatePtr);

@@ -1,10 +1,9 @@
 #pragma once
 
-#include "gamestatehandler.h"
 #include "boardhandler.h"
 #include "configslisthandler.h"
-#include "shipslistcontroller.h"
-#include "shotslistcontroller.h"
+#include "shipslisthandler.h"
+#include "shotslisthandler.h"
 #include "msghandler.h"
 
 namespace game
@@ -28,13 +27,13 @@ private:
     ConfigsListPtr configsListPtr;
     ShipsListPtr shipsListPtr;
     ShotsListPtr shotsListPtr;
-    MsgPtr msgPtr;
+    std::string msg;
 
     GameStateHandlerPtr gameStateHandlerPtr;
     BoardHandlerPtr boardHandlerPtr;
     ConfigsListHandlerPtr configsListHandlerPtr;
-    ShipsListControllerPtr shipsListControllerPtr;
-    ShotsListControllerPtr shotsListControllerPtr;
+    ShipsListHandlerPtr shipsListHandlerPtr;
+    ShotsListHandlerPtr shotsListHandlerPtr;
     MsgHandlerPtr msgHandlerPtr;
 
 public:
@@ -45,8 +44,8 @@ public:
     GameStateHandlerPtr getGameStateHandlerPtr() const;
     BoardHandlerPtr getBoardHandlerPtr() const;
     ConfigsListHandlerPtr getConfigsListHandlerPtr() const;
-    ShipsListControllerPtr getShipsListControllerPtr() const;
-    ShotsListControllerPtr getShotsListControllerPtr() const;
+    ShipsListHandlerPtr getShipsListHandlerPtr() const;
+    ShotsListHandlerPtr getShotsListHandlerPtr() const;
     MsgHandlerPtr getMsgHandlerPtr() const;
 
 };

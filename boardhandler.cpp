@@ -14,12 +14,12 @@ BoardHandler::~BoardHandler()
     this->gameStatePtr.reset();
 }
 
-void BoardHandler::print() const override
+void BoardHandler::print() const
 {
     //@TODO
 }
 
-void BoardHandler::onUpdate(const std::string&) override
+void BoardHandler::onUpdate(const std::string&)
 {
     //@TODO
 }
@@ -28,8 +28,6 @@ const Board& BoardHandler::getBoard() const
 {
     return *this->boardPtr;
 }
-
-BoardPtr BoardHandler::getBoardPtr() const { return this->boardPtr; }
 
 const std::list<Ship>& BoardHandler::getShipsList() const
 {

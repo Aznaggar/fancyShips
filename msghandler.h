@@ -16,32 +16,26 @@ namespace game
   }
 }
 
-//using game;
-
-using MsgPtr = std::shared_ptr<std::string>;
+using namespace game;
 
 class MsgHandler :
-        private GameStateHandler,
         public Observer,
         public IPrintable
 {
 private:
-    MsgPtr msgPtr;
+    std::string msg;
     GameStatePtr gameStatePtr;
 
+    const std::string& getMsg() const;
+    const game::state& getGameState() const;
+
+    void setMsg(const std::string&);
 public:
-    MsgHandler(MsgPtr, GameStatePtr);
+    MsgHandler(const std::string&, GameStatePtr);
     ~MsgHandler();
 
     void print() const override;
     void onUpdate(const std::string&) override;
-
-    MsgPtr getMsgPtr() const;
-    const std::string& getMsg() const;
-    const game::state& getGameState() const;
-
-    void setMsgPtr(const std::string&);
-    void setMsgPtr(MsgPtr);
 };
 
 using MsgHandlerPtr = std::shared_ptr<MsgHandler>;

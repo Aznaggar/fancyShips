@@ -5,8 +5,7 @@ Game::Game() :
     boardPtr(std::make_shared<Board>()),
     configsListPtr(std::make_shared<std::list<Config>>()),
     shipsListPtr(std::make_shared<std::list<Ship>>()),
-    shotsListPtr(std::make_shared<ShotsList>()),
-    msgPtr(std::make_shared<std::string>()) {}
+    shotsListPtr(std::make_shared<std::list<battle::shot>>()) {}
 
 void Game::run()
 {
@@ -16,14 +15,14 @@ void Game::run()
                                                            this->gameStatePtr);
     this->configsListHandlerPtr = std::make_shared<ConfigsListHandler>(this->configsListPtr,
                                                                        this->gameStatePtr);
-    this->shipsListControllerPtr = std::make_shared<ShipsListController>(this->shipsListPtr,
-                                                                         this->configsListPtr,
-                                                                         this->gameStatePtr,
-                                                                         this->boardPtr);
-    this->shotsListControllerPtr = std::make_shared<ShotsListController>(this->shotsListPtr,
-                                                                         this->shipsListPtr,
-                                                                         this->gameStatePtr);
-    this->msgHandlerPtr = std::make_shared<MsgHandler>(this->msgPtr,
+    this->shipsListHandlerPtr = std::make_shared<ShipsListHandler>(this->shipsListPtr,
+                                                                   this->configsListPtr,
+                                                                   this->gameStatePtr,
+                                                                    this->boardPtr);
+    this->shotsListHandlerPtr = std::make_shared<ShotsListHandler>(this->shotsListPtr,
+                                                                   this->shipsListPtr,
+                                                                   this->gameStatePtr);
+    this->msgHandlerPtr = std::make_shared<MsgHandler>(this->msg,
                                                        this->gameStatePtr);
 }
 
@@ -47,13 +46,13 @@ ConfigsListHandlerPtr Game::getConfigsListHandlerPtr() const
     return this->configsListHandlerPtr;
 }
 
-ShipsListControllerPtr Game::getShipsListControllerPtr() const
+ShipsListHandlerPtr Game::getShipsListHandlerPtr() const
 {
-    return this->shipsListControllerPtr;
+    return this->shipsListHandlerPtr;
 }
-ShotsListControllerPtr Game::getShotsListControllerPtr() const
+ShotsListHandlerPtr Game::getShotsListHandlerPtr() const
 {
-    return this->shotsListControllerPtr;
+    return this->shotsListHandlerPtr;
 }
 
 MsgHandlerPtr Game::getMsgHandlerPtr() const

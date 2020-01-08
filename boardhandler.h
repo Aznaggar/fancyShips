@@ -31,7 +31,7 @@ private:
     ShipsListPtr shipsListPtr;
     GameStatePtr gameStatePtr;
 
-    BoardPtr getBoardPtr() const;
+    const Board& getBoard() const;
     const std::list<Ship>& getShipsList() const;
     const game::state& getGameState() const;
 
@@ -45,9 +45,7 @@ public:
     ~BoardHandler();
 
     void print() const override;
-    void onUpdate(const std::string&) override;
-
-    const Board& getBoard() const;
+    void onUpdate(const std::string&) override;    
 };
 
 using BoardHandlerPtr = std::shared_ptr<BoardHandler>;

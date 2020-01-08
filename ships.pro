@@ -16,8 +16,6 @@ SOURCES += main.cpp \
     subject.cpp \
     inputhandler.cpp \
     gamestatehandler.cpp \
-    shipslistcontroller.cpp \
-    shotslistcontroller.cpp \
     shotslisthandler.cpp \
     boardhandler.cpp \
     msghandler.cpp
@@ -38,8 +36,6 @@ HEADERS += \
     inputhandler.h \
     gameconstants.h \
     gamestatehandler.h \
-    shipslistcontroller.h \
-    shotslistcontroller.h \
     shotslisthandler.h \
     boardhandler.h \
     msghandler.h

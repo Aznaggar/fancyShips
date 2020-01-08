@@ -27,11 +27,11 @@ class ShipTypeConfig
 {
 private:
     ShipType type;
-    int typeCounter;
-    int maxTypeNum;
+    unsigned int typeCounter;
+    unsigned int maxTypeNum;
 
 public:
-    ShipTypeConfig(const ShipType& type, const int maxTypeNum);
+    ShipTypeConfig(const ShipType& type, const unsigned int maxTypeNum);
     void incrementTypeCounter();
     bool isTypeFullyDeployed() const;
     const ShipType& getType() const;

@@ -23,8 +23,8 @@ class GameStateHandler : public Observer
 {
 private:
     GameStatePtr gameStatePtr;
-protected:
-    void setGameStatePtr(GameStatePtr);
+
+    const game::state& getGameState() const;
     void setGameStatePtr(const game::state&);
 public:
     GameStateHandler(GameStatePtr);
@@ -32,8 +32,6 @@ public:
 
     void onUpdate(const std::string&) override;
 
-    GameStatePtr getGameStatePtr() const;
-    const game::state& getGameState() const;
 };
 
 using GameStateHandlerPtr = std::shared_ptr<GameStateHandler>;
