@@ -1,8 +1,8 @@
 #pragma once
 
 #include "ship.h"
-#include "gamestatehandler.h"
-#include "observer.h"
+#include "gamestateobserver.h"
+#include "inputobserver.h"
 #include "iprintable.h"
 
 namespace game
@@ -23,28 +23,28 @@ using ShotsList = std::list<battle::shot>;
 using ShotsListPtr = std::shared_ptr<ShotsList>;
 
 class ShotsListHandler :
-        public Observer,
+        public InputObserver,
+        public GameStateObserver,
         public IPrintable
 {
 private:
     ShotsListPtr shotsListPtr;
     ShipsListPtr shipsListPtr;
-    GameStatePtr gameStatePtr;
+
+    std::string input;
 
     const std::list<battle::shot>& getShotsList() const;
     const std::list<Ship>& getShipsList() const;
-    const game::state& getGameState() const;
 
     void addShot(const battle::shot&);
 public:
     ShotsListHandler(ShotsListPtr,
-                     ShipsListPtr,
-                     GameStatePtr);
+                     ShipsListPtr);
     ~ShotsListHandler();
 
-    void onUpdate(const std::string&) override;
+    void onInputUpdate(const std::string&) override;
+    void onGameStateUpdate(const game::state&) override;
     void print() const override;
-
 };
 
 using ShotsListPtr = std::shared_ptr<std::list<battle::shot>>;

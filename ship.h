@@ -68,6 +68,7 @@ public:
     const std::list<Position>& getAdjPosList() const;
 
     bool isOnBoard(const Board&) const;
+    bool isSunk();
 };
 
 using ShipsListPtr = std::shared_ptr<std::list<Ship>>;

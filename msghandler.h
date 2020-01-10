@@ -1,8 +1,11 @@
 #pragma once
+#include <memory>
 
-#include "gamestatehandler.h"
-#include "observer.h"
+#include "inputobserver.h"
+#include "gamestateobserver.h"
+#include "inputobserver.h"
 #include "iprintable.h"
+#include "shipslisthandler.h"
 
 namespace game
 {
@@ -11,31 +14,39 @@ namespace game
     const std::string INVALID_OPTION = "Invalid option chosen. ";
     const std::string INVALID_INPUT = "Invalid input given. ";
 
+    const std::string CONFIG_STATE = "Configuration phase. ";
+    const std::string TYPE_NUM_ADDITION_PART1 = "Set max number of ";
+    const std::string TYPE_NUM_ADDITION_PART2 = "s (";
+    const std::string TYPE_NUM_ADDITION_PART3 = " mast(s))";
+
     const std::string DEPLOYMENT_CHOICE = "Manual / automatic deployment?(m/a): ";
-    const std::string SHIPS_LIST_TYPE_ADDITION = "Max number of ";
   }
 }
 
-using namespace game;
+using namespace game::message;
+using namespace game::shiptype;
 
 class MsgHandler :
-        public Observer,
+        public GameStateObserver,
+        public InputObserver,
         public IPrintable
 {
 private:
     std::string msg;
-    GameStatePtr gameStatePtr;
+    std::string input;
 
-    const std::string& getMsg() const;
-    const game::state& getGameState() const;
+    ShipsListHandlerPtr shipsListHandlerPtr;
 
-    void setMsg(const std::string&);
+    void setConfigMsg(std::string&,
+                      std::string);
+
 public:
-    MsgHandler(const std::string&, GameStatePtr);
-    ~MsgHandler();
+    MsgHandler(const std::string&,
+               ShipsListHandlerPtr);
 
     void print() const override;
-    void onUpdate(const std::string&) override;
+    void onGameStateUpdate(const game::state&) override;
+    void onInputUpdate(const std::string& input) override;
 };
 
 using MsgHandlerPtr = std::shared_ptr<MsgHandler>;

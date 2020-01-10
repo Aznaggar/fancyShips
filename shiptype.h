@@ -15,12 +15,42 @@ namespace game
         }
         namespace lenght
         {
-            const int CARRIER = 5;
-            const int BATTLESHIP = 4;
-            const int CRUISER = 3;
-            const int SUBMARINE = 2;
-            const int DESTROYER = 1;
+            const unsigned int CARRIER = 5;
+            const unsigned int BATTLESHIP = 4;
+            const unsigned int CRUISER = 3;
+            const unsigned int SUBMARINE = 2;
+            const unsigned int DESTROYER = 1;
         }
+        namespace maxnum
+        {
+            namespace value
+            {
+                const unsigned int CARRIER = 1;
+                const unsigned int BATTLESHIP = 2;
+                const unsigned int CRUISER = 3;
+                const unsigned int SUBMARINE = 4;
+                const unsigned int DESTROYER = 5;
+            }
+            namespace arrayindex
+            {
+                const unsigned int CARRIER = 0;
+                const unsigned int BATTLESHIP = 1;
+                const unsigned int CRUISER = 2;
+                const unsigned int SUBMARINE = 3;
+                const unsigned int DESTROYER = 4;
+            }
+        }
+        const unsigned int TYPES_NUM = 5;
+        class Functions
+        {
+        private:
+            Functions()                      = delete;
+            Functions(Functions const&)      = delete;
+            void operator=(Functions const&) = delete;
+        public:
+            static unsigned int getTypeLen(const std::string&);
+            static unsigned int getArrayIndex(const std::string&);
+        };
     }
 }
 
@@ -30,16 +60,10 @@ class ShipType
 {
 private:
     std::string name;
-    int len;
-
-    bool isNameInDefaultTypes(const std::string& name) const;
-    bool isLenInDefaultTypes(const int len) const;
-
-    std::string getDefaultName(const int len) const;
-    int getDefaultLen(const std::string& name) const;
+    unsigned int len;
 
 public:
-    ShipType(const std::string& name, const int len);
-    int getLen() const;
+    ShipType(const std::string&, const unsigned int);
+    unsigned int getLen() const;
     const std::string& getName() const;
 };

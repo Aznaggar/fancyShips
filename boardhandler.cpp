@@ -1,17 +1,14 @@
 #include "boardhandler.h"
 
 BoardHandler::BoardHandler(BoardPtr boardPtr,
-                           ShipsListPtr shipsListPtr,
-                           GameStatePtr gameStatePtr) :
+                           ShipsListPtr shipsListPtr) :
     boardPtr(boardPtr),
-    shipsListPtr(shipsListPtr),
-    gameStatePtr(gameStatePtr) {}
+    shipsListPtr(shipsListPtr) {}
 
 BoardHandler::~BoardHandler()
 {
     this->boardPtr.reset();
     this->shipsListPtr.reset();
-    this->gameStatePtr.reset();
 }
 
 void BoardHandler::print() const
@@ -19,8 +16,17 @@ void BoardHandler::print() const
     //@TODO
 }
 
-void BoardHandler::onUpdate(const std::string&)
+void BoardHandler::onInputUpdate(const std::string& input)
 {
+    this->input = input;
+}
+
+void BoardHandler::onGameStateUpdate(const game::state& gameState)
+{
+    //switch(gameState)
+    //{
+    //    switch(this->input)
+    //}
     //@TODO
 }
 
@@ -32,11 +38,6 @@ const Board& BoardHandler::getBoard() const
 const std::list<Ship>& BoardHandler::getShipsList() const
 {
     return *this->shipsListPtr;
-}
-
-const game::state& BoardHandler::getGameState() const
-{
-    return *this->gameStatePtr;
 }
 
 void BoardHandler::printEmpty() const

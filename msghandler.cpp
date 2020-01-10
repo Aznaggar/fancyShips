@@ -1,36 +1,77 @@
 #include "msghandler.h"
 
 MsgHandler::MsgHandler(const std::string& msg,
-                       GameStatePtr gameStatePtr) :
+                       ShipsListHandlerPtr shipsListHandlerPtr) :
     msg(msg),
-    gameStatePtr(gameStatePtr) {}
-
-MsgHandler::~MsgHandler()
-{
-    this->gameStatePtr.reset();
-}
+    shipsListHandlerPtr(shipsListHandlerPtr) {}
 
 void MsgHandler::print() const
 {
-    //@TODO
+    std::cout << this->msg << std::endl;
 }
 
-void MsgHandler::onUpdate(const std::string& input)
+void MsgHandler::onInputUpdate(const std::string& input)
 {
-    //@TODO
+    this->input = input;
 }
 
-const std::string& MsgHandler::getMsg() const
+void MsgHandler::onGameStateUpdate(const game::state& gameState)
 {
-    return this->msg;
+    std::string msg;
+    const bool noneMaxNumSet = this->shipsListHandlerPtr->noneMaxNumSet();
+    const bool onlyFirstMaxNumSet = this->shipsListHandlerPtr->onlyFirstMaxNumSet();
+    const bool onlyTwoFirstMaxNumSet = this->shipsListHandlerPtr->onlyTwoFirstMaxNumSet();
+    const bool onlyThreeFirstMaxNumSet = this->shipsListHandlerPtr->onlyThreeFirstMaxNumSet();
+    const bool onlyFourFirstMaxNumSet = this->shipsListHandlerPtr->onlyFourFirstMaxNumSet();
+
+    switch (gameState)
+    {
+    case game::state::CONFIG:
+        msg.append(message::CONFIG_STATE);
+//        switch (this->input)
+//        {
+//            onError
+//        }
+        if (noneMaxNumSet)
+        {
+            this->setConfigMsg(msg, shiptype::name::DESTROYER);
+        }
+        else if (onlyFirstMaxNumSet)
+        {
+            this->setConfigMsg(msg, shiptype::name::SUBMARINE);
+        }
+        else if (onlyTwoFirstMaxNumSet)
+        {
+            this->setConfigMsg(msg, shiptype::name::CRUISER);
+        }
+        else if (onlyThreeFirstMaxNumSet)
+        {
+            this->setConfigMsg(msg, shiptype::name::BATTLESHIP);
+        }
+        else if (onlyFourFirstMaxNumSet)
+        {
+            this->setConfigMsg(msg, shiptype::name::CARRIER);
+        }
+    case game::state::DEPLOYMENT:
+
+        break;
+    case game::state::BATTLE:
+
+        break;
+    case game::state::END:
+
+        break;
+    default:
+        break;
+    }
 }
 
-const game::state& MsgHandler::getGameState() const
+void MsgHandler::setConfigMsg(std::string& msg, std::string shipTypeName)
 {
-    return *this->gameStatePtr;
-}
-
-void MsgHandler::setMsg(const std::string& msg)
-{
-    this->msg = msg;
+    unsigned int shipTypeLen = shiptype::Functions::getTypeLen(shipTypeName);
+    msg.append(message::TYPE_NUM_ADDITION_PART1 +
+               shipTypeName +
+               message::TYPE_NUM_ADDITION_PART2 +
+               std::to_string(shipTypeLen) +
+               message::TYPE_NUM_ADDITION_PART3);
 }

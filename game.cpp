@@ -1,61 +1,61 @@
 #include "game.h"
 
 Game::Game() :
-    gameStatePtr(std::make_shared<game::state>(game::state::ENTRY)),
+    gameState(game::state::CONFIG),
     boardPtr(std::make_shared<Board>()),
-    configsListPtr(std::make_shared<std::list<Config>>()),
     shipsListPtr(std::make_shared<std::list<Ship>>()),
     shotsListPtr(std::make_shared<std::list<battle::shot>>()) {}
 
-void Game::run()
+void Game::run(InputHandlerPtr inputHandlerPtr)
 {
-    this->gameStateHandlerPtr = std::make_shared<GameStateHandler>(this->gameStatePtr);
-    this->boardHandlerPtr = std::make_shared<BoardHandler>(this->boardPtr,
-                                                           this->shipsListPtr,
-                                                           this->gameStatePtr);
-    this->configsListHandlerPtr = std::make_shared<ConfigsListHandler>(this->configsListPtr,
-                                                                       this->gameStatePtr);
+    this->initHandlers();
+    this->provideObservers(inputHandlerPtr);
+}
+
+void Game::initHandlers()
+{
     this->shipsListHandlerPtr = std::make_shared<ShipsListHandler>(this->shipsListPtr,
-                                                                   this->configsListPtr,
-                                                                   this->gameStatePtr,
-                                                                    this->boardPtr);
+                                                                   this->boardPtr);
+    this->gameStateProviderPtr = std::make_shared<GameStateProvider>(this->gameState,
+                                                                     this->shipsListHandlerPtr);
+    this->boardHandlerPtr = std::make_shared<BoardHandler>(this->boardPtr,
+                                                           this->shipsListPtr);
     this->shotsListHandlerPtr = std::make_shared<ShotsListHandler>(this->shotsListPtr,
-                                                                   this->shipsListPtr,
-                                                                   this->gameStatePtr);
+                                                                   this->shipsListPtr);
     this->msgHandlerPtr = std::make_shared<MsgHandler>(this->msg,
-                                                       this->gameStatePtr);
+                                                       this->shipsListHandlerPtr);
+}
+
+void Game::provideObservers(InputHandlerPtr inputHandlerPtr)
+{
+    inputHandlerPtr->getObservers(this->gameStateProviderPtr,
+                                  this->boardHandlerPtr,
+                                  this->shipsListHandlerPtr,
+                                  this->shotsListHandlerPtr);
+    this->gameStateProviderPtr->getObservers(this->boardHandlerPtr,
+                                             this->shotsListHandlerPtr,
+                                             this->msgHandlerPtr);
 }
 
 bool Game::isRunning() const
 {
-    return *this->gameStatePtr != game::state::END;
+    return this->gameState != game::state::END;
 }
 
-GameStateHandlerPtr Game::getGameStateHandlerPtr() const
+void Game::print() const
 {
-    return this->gameStateHandlerPtr;
+    this->clearScreen();
+    this->boardHandlerPtr->print();
+    this->shotsListHandlerPtr->print();
+    this->msgHandlerPtr->print();
 }
 
-BoardHandlerPtr Game::getBoardHandlerPtr() const
+void Game::clearScreen() const
 {
-    return this->boardHandlerPtr;
+    std::cout << game::screen::CLEAR_CMD;
 }
 
-ConfigsListHandlerPtr Game::getConfigsListHandlerPtr() const
+void Game::updateGame()
 {
-    return this->configsListHandlerPtr;
-}
-
-ShipsListHandlerPtr Game::getShipsListHandlerPtr() const
-{
-    return this->shipsListHandlerPtr;
-}
-ShotsListHandlerPtr Game::getShotsListHandlerPtr() const
-{
-    return this->shotsListHandlerPtr;
-}
-
-MsgHandlerPtr Game::getMsgHandlerPtr() const
-{
-    return this->msgHandlerPtr;
+    this->gameStateProviderPtr->updateGameState();
 }

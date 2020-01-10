@@ -1,16 +1,25 @@
 #pragma once
 #include <iostream>
 
-#include "subject.h"
-#include "game.h"
+#include "inputsubject.h"
+#include "gamestateprovider.h"
+#include "boardhandler.h"
+#include "shipslisthandler.h"
+#include "shotslisthandler.h"
+#include "msghandler.h"
 
-class InputHandler : public Subject
+class InputHandler : public InputSubject
 {
 private:
     std::string input;
 public:
-    void getObservers(const Game&);
+    void getObservers(GameStateProviderPtr,
+                      BoardHandlerPtr,
+                      ShipsListHandlerPtr,
+                      ShotsListHandlerPtr);
     void readInput();
     void parseInput();
-    void updateGame();
+    void updateInput();
 };
+
+using InputHandlerPtr = std::shared_ptr<InputHandler>;

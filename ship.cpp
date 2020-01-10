@@ -270,3 +270,15 @@ bool Ship::isOnBoard(const Board& board) const
 
     return result;
 }
+
+bool Ship::isSunk()
+{
+    for (const Mast& mast : this->mastVec)
+    {
+        if (mast.getState() == game::mast::state::FLOATING)
+        {
+            return false;
+        }
+    }
+    return true;
+}

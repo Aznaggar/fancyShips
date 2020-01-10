@@ -2,9 +2,9 @@
 
 #include "board.h"
 #include "iprintable.h"
-#include "observer.h"
+#include "inputobserver.h"
 #include "shipslisthandler.h"
-#include "gamestatehandler.h"
+#include "gamestateobserver.h"
 
 namespace game
 {
@@ -24,28 +24,29 @@ using namespace game;
 
 class BoardHandler :
         public IPrintable,
-        public Observer
+        public InputObserver,
+        public GameStateObserver
 {
 private:
     BoardPtr boardPtr;
     ShipsListPtr shipsListPtr;
-    GameStatePtr gameStatePtr;
+
+    std::string input;
 
     const Board& getBoard() const;
     const std::list<Ship>& getShipsList() const;
-    const game::state& getGameState() const;
 
     void printEmpty() const;
     void printNonEmpty() const;
     void printBattle() const;
 public:
     BoardHandler(BoardPtr,
-                 ShipsListPtr,
-                 GameStatePtr);
+                 ShipsListPtr);
     ~BoardHandler();
 
     void print() const override;
-    void onUpdate(const std::string&) override;    
+    void onInputUpdate(const std::string&) override;
+    void onGameStateUpdate(const game::state&) override;
 };
 
 using BoardHandlerPtr = std::shared_ptr<BoardHandler>;

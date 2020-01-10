@@ -1,13 +1,14 @@
 #include "inputhandler.h"
 
-void InputHandler::getObservers(const Game& game)
+void InputHandler::getObservers(GameStateProviderPtr gameStateProviderPtr,
+                                BoardHandlerPtr boardHandlerPtr,
+                                ShipsListHandlerPtr shipsListHandlerPtr,
+                                ShotsListHandlerPtr shotsListHandlerPtr)
 {
-    Subject::addObserver(game.getGameStateHandlerPtr());
-    Subject::addObserver(game.getBoardHandlerPtr());
-    Subject::addObserver(game.getConfigsListHandlerPtr());
-    Subject::addObserver(game.getShipsListHandlerPtr());
-    Subject::addObserver(game.getShotsListHandlerPtr());
-    Subject::addObserver(game.getMsgHandlerPtr());
+    InputSubject::addInputObserver(gameStateProviderPtr);
+    InputSubject::addInputObserver(boardHandlerPtr);
+    InputSubject::addInputObserver(shipsListHandlerPtr);
+    InputSubject::addInputObserver(shotsListHandlerPtr);
 }
 
 void InputHandler::readInput()
@@ -20,7 +21,7 @@ void InputHandler::parseInput()
     //@TODO
 }
 
-void InputHandler::updateGame()
+void InputHandler::updateInput()
 {
-    Subject::update(this->input);
+    InputSubject::updateInput(this->input);
 }

@@ -1,21 +1,27 @@
 #include "shotslisthandler.h"
 
 ShotsListHandler::ShotsListHandler(ShotsListPtr shotsListPtr,
-                                   ShipsListPtr shipsListPtr,
-                                   GameStatePtr gameStatePtr) :
+                                   ShipsListPtr shipsListPtr) :
     shotsListPtr(shotsListPtr),
-    shipsListPtr(shipsListPtr),
-    gameStatePtr(gameStatePtr) {}
+    shipsListPtr(shipsListPtr) {}
 
 ShotsListHandler::~ShotsListHandler()
 {
     this->shotsListPtr.reset();
     this->shipsListPtr.reset();
-    this->gameStatePtr.reset();
 }
 
-void ShotsListHandler::onUpdate(const std::string& input)
+void ShotsListHandler::onInputUpdate(const std::string& input)
 {
+    this->input = input;
+}
+
+void ShotsListHandler::onGameStateUpdate(const game::state& gameState)
+{
+    //switch(gameState)
+    //{
+    //    switch(this->input)
+    //}
     //@TODO
 }
 
@@ -32,11 +38,6 @@ const std::list<battle::shot>& ShotsListHandler::getShotsList() const
 const std::list<Ship>& ShotsListHandler::getShipsList() const
 {
     return *this->shipsListPtr;
-}
-
-const game::state& ShotsListHandler::getGameState() const
-{
-    return *this->gameStatePtr;
 }
 
 void ShotsListHandler::addShot(const battle::shot& shot)
