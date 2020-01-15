@@ -1,4 +1,5 @@
 #pragma once
+#include <cstdlib>
 
 #include "board.h"
 #include "iprintable.h"
@@ -20,7 +21,8 @@ namespace game
     }
 }
 
-using namespace game;
+using namespace game::input;
+using namespace board;
 
 class BoardHandler :
         public IPrintable,
@@ -29,6 +31,7 @@ class BoardHandler :
 {
 private:
     BoardPtr boardPtr;
+    bool resizeChosen;
     ShipsListPtr shipsListPtr;
 
     std::string input;
@@ -44,9 +47,9 @@ public:
                  ShipsListPtr);
     ~BoardHandler();
 
-    void print() const override;
+    void print(const state&) const override;
     void onInputUpdate(const std::string&) override;
-    void onGameStateUpdate(const game::state&) override;
+    void onGameStateUpdate(const state&) override;
 };
 
 using BoardHandlerPtr = std::shared_ptr<BoardHandler>;

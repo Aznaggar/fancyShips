@@ -16,11 +16,6 @@ void InputHandler::readInput()
     std::getline(std::cin, this->input);
 }
 
-void InputHandler::parseInput()
-{
-    //@TODO
-}
-
 void InputHandler::updateInput()
 {
     InputSubject::updateInput(this->input);

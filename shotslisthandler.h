@@ -44,7 +44,7 @@ public:
 
     void onInputUpdate(const std::string&) override;
     void onGameStateUpdate(const game::state&) override;
-    void print() const override;
+    void print(const state&) const override;
 };
 
 using ShotsListPtr = std::shared_ptr<std::list<battle::shot>>;

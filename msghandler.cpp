@@ -5,7 +5,7 @@ MsgHandler::MsgHandler(const std::string& msg,
     msg(msg),
     shipsListHandlerPtr(shipsListHandlerPtr) {}
 
-void MsgHandler::print() const
+void MsgHandler::print(const state& gameState) const
 {
     std::cout << this->msg << std::endl;
 }
@@ -28,35 +28,32 @@ void MsgHandler::onGameStateUpdate(const game::state& gameState)
     {
     case game::state::CONFIG:
         msg.append(message::CONFIG_STATE);
-//        switch (this->input)
-//        {
-//            onError
-//        }
         if (noneMaxNumSet)
         {
-            this->setConfigMsg(msg, shiptype::name::DESTROYER);
+            this->setConfigMsg(msg, type::name::DESTROYER);
         }
         else if (onlyFirstMaxNumSet)
         {
-            this->setConfigMsg(msg, shiptype::name::SUBMARINE);
+            this->setConfigMsg(msg, type::name::SUBMARINE);
         }
         else if (onlyTwoFirstMaxNumSet)
         {
-            this->setConfigMsg(msg, shiptype::name::CRUISER);
+            this->setConfigMsg(msg, type::name::CRUISER);
         }
         else if (onlyThreeFirstMaxNumSet)
         {
-            this->setConfigMsg(msg, shiptype::name::BATTLESHIP);
+            this->setConfigMsg(msg, type::name::BATTLESHIP);
         }
         else if (onlyFourFirstMaxNumSet)
         {
-            this->setConfigMsg(msg, shiptype::name::CARRIER);
+            this->setConfigMsg(msg, type::name::CARRIER);
         }
+        break;
     case game::state::DEPLOYMENT:
-
+        // @TODO
         break;
     case game::state::BATTLE:
-
+        // @TODO
         break;
     case game::state::END:
 
@@ -66,12 +63,12 @@ void MsgHandler::onGameStateUpdate(const game::state& gameState)
     }
 }
 
-void MsgHandler::setConfigMsg(std::string& msg, std::string shipTypeName)
+void MsgHandler::setConfigMsg(std::string& msg, std::string typeName)
 {
-    unsigned int shipTypeLen = shiptype::Functions::getTypeLen(shipTypeName);
+    unsigned int typeLen = type::functions::GET_TYPE_LEN(typeName);
     msg.append(message::TYPE_NUM_ADDITION_PART1 +
-               shipTypeName +
+               typeName +
                message::TYPE_NUM_ADDITION_PART2 +
-               std::to_string(shipTypeLen) +
+               std::to_string(typeLen) +
                message::TYPE_NUM_ADDITION_PART3);
 }

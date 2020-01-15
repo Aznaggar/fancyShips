@@ -6,6 +6,19 @@ Game::Game() :
     shipsListPtr(std::make_shared<std::list<Ship>>()),
     shotsListPtr(std::make_shared<std::list<battle::shot>>()) {}
 
+Game::~Game()
+{
+    this->gameStateProviderPtr.reset();
+    this->boardHandlerPtr.reset();
+    this->shipsListHandlerPtr.reset();
+    this->shotsListHandlerPtr.reset();
+    this->msgHandlerPtr.reset();
+
+    this->boardPtr.reset();
+    this->shipsListPtr.reset();
+    this->shotsListPtr.reset();
+}
+
 void Game::run(InputHandlerPtr inputHandlerPtr)
 {
     this->initHandlers();
@@ -42,20 +55,16 @@ bool Game::isRunning() const
     return this->gameState != game::state::END;
 }
 
-void Game::print() const
+void Game::printGame() const
 {
-    this->clearScreen();
-    this->boardHandlerPtr->print();
-    this->shotsListHandlerPtr->print();
-    this->msgHandlerPtr->print();
+    system("cls");
+    this->boardHandlerPtr->print(this->gameState);
+    this->shotsListHandlerPtr->print(this->gameState);
+    this->msgHandlerPtr->print(this->gameState);
 }
 
-void Game::clearScreen() const
+void Game::updateGame(InputHandlerPtr inputHandlerPtr)
 {
-    std::cout << game::screen::CLEAR_CMD;
-}
-
-void Game::updateGame()
-{
+    inputHandlerPtr->updateInput();
     this->gameStateProviderPtr->updateGameState();
 }

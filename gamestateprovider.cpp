@@ -1,6 +1,6 @@
 #include "gamestateprovider.h"
 
-GameStateProvider::GameStateProvider(const game::state& gameState,
+GameStateProvider::GameStateProvider(const state& gameState,
                                      ShipsListHandlerPtr shipsListHandlerPtr) :
     gameState(gameState),
     shipsListHandlerPtr(shipsListHandlerPtr) {}
@@ -28,24 +28,24 @@ void GameStateProvider::setGameState()
 
     switch (this->gameState)
     {
-    case game::state::CONFIG:
+    case state::CONFIG:
         if (allMaxNumSet)
         {
-            this->gameState = game::state::DEPLOYMENT;
+            this->gameState = state::DEPLOYMENT;
         }
         else if (this->inputEquals(commands::END_GAME))
         {
-            this->gameState = game::state::END;
+            this->gameState = state::END;
         }
         break;
-    case game::state::DEPLOYMENT:
+    case state::DEPLOYMENT:
         if (allShipsDeployed || this->inputEquals(commands::FINISH_DEVELOPMENT))
         {
-            this->gameState = game::state::DEPLOYMENT;
+            this->gameState = state::DEPLOYMENT;
         }
         else if (this->inputEquals(commands::END_GAME))
         {
-            this->gameState = game::state::END;
+            this->gameState = state::END;
         }
         break;
     case state::BATTLE:
@@ -54,7 +54,7 @@ void GameStateProvider::setGameState()
             this->gameState = state::END;
         }
         break;
-    case game::state::END:
+    case state::END:
         break;
     default:
         break;

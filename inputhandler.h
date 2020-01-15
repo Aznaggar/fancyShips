@@ -18,7 +18,6 @@ public:
                       ShipsListHandlerPtr,
                       ShotsListHandlerPtr);
     void readInput();
-    void parseInput();
     void updateInput();
 };
 

@@ -18,14 +18,10 @@ void ShotsListHandler::onInputUpdate(const std::string& input)
 
 void ShotsListHandler::onGameStateUpdate(const game::state& gameState)
 {
-    //switch(gameState)
-    //{
-    //    switch(this->input)
-    //}
     //@TODO
 }
 
-void ShotsListHandler::print() const
+void ShotsListHandler::print(const state& gameState) const
 {
     //@TODO
 }

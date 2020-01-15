@@ -97,8 +97,8 @@ bool ShipsListHandler::inputEquals(const std::string& command)
 void ShipsListHandler::setShipTypeMaxNum(const std::string& name)
 {
     const unsigned int inputLen = std::stoul(this->input);
-    const unsigned int typeLen = shiptype::Functions::getTypeLen(name);
-    const unsigned int maxNumTypeIndex = shiptype::Functions::getArrayIndex(name);
+    const unsigned int typeLen = functions::GET_TYPE_LEN(name);
+    const unsigned int maxNumTypeIndex = functions::GET_ARRAY_INDEX(name);
 
     if (inputLen <= typeLen)
     {
@@ -130,21 +130,21 @@ void ShipsListHandler::initShipTypeMaxNumsArray()
 unsigned int ShipsListHandler::getMaxTypeNum(const std::string& name) const
 {
     unsigned int index = 0;
-    if (name == shiptype::name::DESTROYER)
+    if (name == name::DESTROYER)
     {
-        index = shiptype::maxnum::arrayindex::DESTROYER;
-    } else if (name == shiptype::name::SUBMARINE)
+        index = maxnum::arrayindex::DESTROYER;
+    } else if (name == name::SUBMARINE)
     {
-        index = shiptype::maxnum::arrayindex::SUBMARINE;
-    } else if (name == shiptype::name::CRUISER)
+        index = maxnum::arrayindex::SUBMARINE;
+    } else if (name == name::CRUISER)
     {
-        index = shiptype::maxnum::arrayindex::CRUISER;
-    } else if (name == shiptype::name::BATTLESHIP)
+        index = maxnum::arrayindex::CRUISER;
+    } else if (name == name::BATTLESHIP)
     {
-        index = shiptype::maxnum::arrayindex::BATTLESHIP;
-    } else if (name == shiptype::name::CARRIER)
+        index = maxnum::arrayindex::BATTLESHIP;
+    } else if (name == name::CARRIER)
     {
-        index = shiptype::maxnum::arrayindex::CARRIER;
+        index = maxnum::arrayindex::CARRIER;
     } else
     {
         return 0;
@@ -297,7 +297,6 @@ bool ShipsListHandler::isTypeDeployed(const std::string& typeName) const
 
 bool ShipsListHandler::allShipsDeployed() const
 {
-    using namespace shiptype::name;
     const bool destroyerDeployed = this->isTypeDeployed(name::DESTROYER);
     const bool submarineDeployed = this->isTypeDeployed(name::SUBMARINE);
     const bool cruiserDeployed = this->isTypeDeployed(name::CRUISER);

@@ -7,7 +7,7 @@
 #include "shotslisthandler.h"
 #include "msghandler.h"
 
-using namespace game::commands;
+using namespace game::input;
 
 class GameStateProvider :
         public GameStateSubject,
@@ -15,13 +15,13 @@ class GameStateProvider :
 {
 private:
     std::string input;
-    game::state gameState;
+    state gameState;
     ShipsListHandlerPtr shipsListHandlerPtr;
 
     void setGameState();
     bool inputEquals(const std::string&) const;
 public:
-    GameStateProvider(const game::state&,
+    GameStateProvider(const state&,
                       ShipsListHandlerPtr);
     ~GameStateProvider();
     void getObservers(BoardHandlerPtr,

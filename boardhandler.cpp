@@ -11,9 +11,31 @@ BoardHandler::~BoardHandler()
     this->shipsListPtr.reset();
 }
 
-void BoardHandler::print() const
+void BoardHandler::print(const state& gameState) const
 {
-    //@TODO
+    switch (gameState)
+    {
+    case state::CONFIG:
+        this->printEmpty();
+        break;
+    case state::DEPLOYMENT:
+        if (this->getShipsList().empty())
+        {
+            this->printEmpty();
+        }
+        else
+        {
+            this->printNonEmpty();
+        }
+        break;
+    case state::BATTLE:
+        this->printBattle();
+        break;
+    case state::END:
+        break;
+    default:
+        break;
+    }
 }
 
 void BoardHandler::onInputUpdate(const std::string& input)
@@ -21,13 +43,38 @@ void BoardHandler::onInputUpdate(const std::string& input)
     this->input = input;
 }
 
-void BoardHandler::onGameStateUpdate(const game::state& gameState)
+void BoardHandler::onGameStateUpdate(const state& gameState)
 {
-    //switch(gameState)
-    //{
-    //    switch(this->input)
-    //}
-    //@TODO
+    switch (gameState)
+    {
+    case state::CONFIG:
+        break;
+    case state::DEPLOYMENT:
+        if (resizeChosen)
+        {
+            if (input::functions::INPUT_MATCHES_PATTERN(patterns::BOARD_RESIZE_GENERAL,
+                                                        this->input))
+            {
+                const CoordsPair coordsPair = input::functions::PARSE_COORDS_INPUT(this->input);
+
+                this->boardPtr->resize(coordsPair.first,
+                                       coordsPair.second);
+                resizeChosen = false;
+
+            }
+        }
+        if (this->input == commands::BOARD_RESIZE)
+        {
+            resizeChosen = true;
+        }
+        break;
+    case state::BATTLE:
+        break;
+    case state::END:
+        break;
+    default:
+        break;
+    }
 }
 
 const Board& BoardHandler::getBoard() const
@@ -39,6 +86,7 @@ const std::list<Ship>& BoardHandler::getShipsList() const
 {
     return *this->shipsListPtr;
 }
+
 
 void BoardHandler::printEmpty() const
 {

@@ -24,7 +24,7 @@ namespace game
 }
 
 using namespace game::message;
-using namespace game::shiptype;
+using namespace game::ship;
 
 class MsgHandler :
         public GameStateObserver,
@@ -44,7 +44,7 @@ public:
     MsgHandler(const std::string&,
                ShipsListHandlerPtr);
 
-    void print() const override;
+    void print(const state&) const override;
     void onGameStateUpdate(const game::state&) override;
     void onInputUpdate(const std::string& input) override;
 };
