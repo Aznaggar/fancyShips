@@ -17,7 +17,7 @@ namespace game
     const std::string CONFIG_STATE = "Configuration phase. ";
     const std::string TYPE_NUM_ADDITION_PART1 = "Set max number of ";
     const std::string TYPE_NUM_ADDITION_PART2 = "s (";
-    const std::string TYPE_NUM_ADDITION_PART3 = " mast(s))";
+    const std::string TYPE_NUM_ADDITION_PART3 = " mast(-s))";
 
     const std::string DEPLOYMENT_CHOICE = "Manual / automatic deployment?(m/a): ";
   }

@@ -132,19 +132,19 @@ unsigned int ShipsListHandler::getMaxTypeNum(const std::string& name) const
     unsigned int index = 0;
     if (name == name::DESTROYER)
     {
-        index = maxnum::arrayindex::DESTROYER;
+        index = maxnum::array::index::DESTROYER;
     } else if (name == name::SUBMARINE)
     {
-        index = maxnum::arrayindex::SUBMARINE;
+        index = maxnum::array::index::SUBMARINE;
     } else if (name == name::CRUISER)
     {
-        index = maxnum::arrayindex::CRUISER;
+        index = maxnum::array::index::CRUISER;
     } else if (name == name::BATTLESHIP)
     {
-        index = maxnum::arrayindex::BATTLESHIP;
+        index = maxnum::array::index::BATTLESHIP;
     } else if (name == name::CARRIER)
     {
-        index = maxnum::arrayindex::CARRIER;
+        index = maxnum::array::index::CARRIER;
     } else
     {
         return 0;

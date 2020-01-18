@@ -7,7 +7,7 @@
 #include "board.h"
 
 using namespace game::ship::type;
-using ShipTypeMaxNumsArray = std::array<unsigned int, TYPES_NUM>;
+using ShipTypeMaxNumsArray = std::array<unsigned int, maxnum::array::LENGTH>;
 
 class ShipsListHandler :
         public InputObserver,

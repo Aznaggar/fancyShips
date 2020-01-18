@@ -15,76 +15,79 @@ namespace game
                 const std::string SUBMARINE = "Submarine";
                 const std::string DESTROYER = "Destroyer";
             }
-            namespace lenght
+            enum length : unsigned int
             {
-                const unsigned int CARRIER = 5;
-                const unsigned int BATTLESHIP = 4;
-                const unsigned int CRUISER = 3;
-                const unsigned int SUBMARINE = 2;
-                const unsigned int DESTROYER = 1;
-            }
+                CARRIER = 5,
+                BATTLESHIP = 4,
+                CRUISER = 3,
+                SUBMARINE = 2,
+                DESTROYER = 1
+            };
             namespace maxnum
             {
-                namespace value
+                enum value : unsigned int
                 {
-                    const unsigned int CARRIER = 1;
-                    const unsigned int BATTLESHIP = 2;
-                    const unsigned int CRUISER = 3;
-                    const unsigned int SUBMARINE = 4;
-                    const unsigned int DESTROYER = 5;
-                }
-                namespace arrayindex
+                    CARRIER = 1,
+                    BATTLESHIP,
+                    CRUISER,
+                    SUBMARINE,
+                    DESTROYER
+                };
+                namespace array
                 {
-                    const unsigned int CARRIER = 0;
-                    const unsigned int BATTLESHIP = 1;
-                    const unsigned int CRUISER = 2;
-                    const unsigned int SUBMARINE = 3;
-                    const unsigned int DESTROYER = 4;
+                    enum index : unsigned int
+                    {
+                        CARRIER = 0,
+                        BATTLESHIP,
+                        CRUISER,
+                        SUBMARINE,
+                        DESTROYER
+                    };
+                    const unsigned int LENGTH = 5;
                 }
             }
-            const unsigned int TYPES_NUM = 5;
             namespace functions
             {
                 inline unsigned int GET_TYPE_LEN(const std::string& name)
                 {
                     if (name == name::DESTROYER)
                     {
-                        return lenght::DESTROYER;
+                        return length::DESTROYER;
                     } else if (name == name::SUBMARINE)
                     {
-                        return lenght::SUBMARINE;
+                        return length::SUBMARINE;
                     } else if (name == name::CRUISER)
                     {
-                        return lenght::CRUISER;
+                        return length::CRUISER;
                     } else if (name == name::BATTLESHIP)
                     {
-                        return lenght::BATTLESHIP;
+                        return length::BATTLESHIP;
                     } else if (name == name::CARRIER)
                     {
-                        return lenght::CARRIER;
+                        return length::CARRIER;
                     } else
                     {
                         return 0;
                     }
                 }
 
-                inline unsigned int GET_ARRAY_INDEX(const std::string& name)
+                inline int GET_ARRAY_INDEX(const std::string& name)
                 {
                     if (name == name::DESTROYER)
                     {
-                        return maxnum::arrayindex::DESTROYER;
+                        return maxnum::array::index::DESTROYER;
                     } else if (name == name::SUBMARINE)
                     {
-                        return maxnum::arrayindex::SUBMARINE;
+                        return maxnum::array::index::SUBMARINE;
                     } else if (name == name::CRUISER)
                     {
-                        return maxnum::arrayindex::CRUISER;
+                        return maxnum::array::index::CRUISER;
                     } else if (name == name::BATTLESHIP)
                     {
-                        return maxnum::arrayindex::BATTLESHIP;
+                        return maxnum::array::index::BATTLESHIP;
                     } else if (name == name::CARRIER)
                     {
-                        return maxnum::arrayindex::CARRIER;
+                        return maxnum::array::index::CARRIER;
                     } else
                     {
                         return -1;
