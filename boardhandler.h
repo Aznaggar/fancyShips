@@ -42,6 +42,8 @@ private:
     void printEmpty() const;
     void printNonEmpty() const;
     void printBattle() const;
+
+    bool posInShipsListPos(const Position&) const;
 public:
     BoardHandler(BoardPtr,
                  ShipsListPtr);

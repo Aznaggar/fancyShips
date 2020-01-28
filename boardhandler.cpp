@@ -87,15 +87,57 @@ const std::list<Ship>& BoardHandler::getShipsList() const
     return *this->shipsListPtr;
 }
 
+bool BoardHandler::posInShipsListPos(const Position& pos) const
+{
+    for (const auto& ship: this->getShipsList())
+    {
+        for (const auto& shipPos: ship.getPosList())
+        {
+            if (pos == shipPos)
+            {
+                return true;
+            }
+        }
+    }
+    return false;
+}
 
 void BoardHandler::printEmpty() const
 {
-    //@TODO
+    const PosMatrix posMatrix = this->boardPtr->getMatrix();
+    const char emptySign = game::board::sign::EMPTY;
+
+    for (const auto& row: posMatrix)
+    {
+        for (const auto& pos: row)
+        {
+            std::cout << emptySign;
+        }
+        std::cout << std::endl;
+    }
 }
 
 void BoardHandler::printNonEmpty() const
 {
-    //@TODO
+    const PosMatrix posMatrix = this->boardPtr->getMatrix();
+    const char emptySign = game::board::sign::EMPTY;
+    const char mastSign = game::board::sign::MAST;
+
+    for (const auto& row: posMatrix)
+    {
+        for (const auto& pos: row)
+        {
+            if (this->posInShipsListPos(pos))
+            {
+                std::cout << mastSign;
+            }
+            else
+            {
+                std::cout << emptySign;
+            }
+        }
+        std::cout << std::endl;
+    }
 }
 
 void BoardHandler::printBattle() const

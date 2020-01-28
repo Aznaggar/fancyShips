@@ -93,6 +93,29 @@ namespace game
                         return -1;
                     }
                 }
+
+                inline unsigned int GET_MAX_NUM_DEFAULT(const std::string& name)
+                {
+                    if (name == name::DESTROYER)
+                    {
+                        return maxnum::value::DESTROYER;
+                    } else if (name == name::SUBMARINE)
+                    {
+                        return maxnum::value::SUBMARINE;
+                    } else if (name == name::CRUISER)
+                    {
+                        return maxnum::value::CRUISER;
+                    } else if (name == name::BATTLESHIP)
+                    {
+                        return maxnum::value::BATTLESHIP;
+                    } else if (name == name::CARRIER)
+                    {
+                        return maxnum::value::CARRIER;
+                    } else
+                    {
+                        return 0;
+                    }
+                }
             }
         }
     }

@@ -97,13 +97,15 @@ bool ShipsListHandler::inputEquals(const std::string& command)
 void ShipsListHandler::setShipTypeMaxNum(const std::string& name)
 {
     const unsigned int inputLen = std::stoul(this->input);
-    const unsigned int typeLen = functions::GET_TYPE_LEN(name);
     const unsigned int maxNumTypeIndex = functions::GET_ARRAY_INDEX(name);
+    const unsigned int defaultShipTypeMaxNum = functions::GET_MAX_NUM_DEFAULT(name);
+    unsigned int shipTypeMaxNum = defaultShipTypeMaxNum;
 
-    if (inputLen <= typeLen)
+    if (inputLen <= defaultShipTypeMaxNum)
     {
-        this->shipTypeMaxNumsArray[maxNumTypeIndex] = inputLen;
+        shipTypeMaxNum = inputLen;
     }
+    this->shipTypeMaxNumsArray[maxNumTypeIndex] = shipTypeMaxNum;
 }
 
 void ShipsListHandler::setShipListPtr(const std::list<Ship>& shipsList)
@@ -172,11 +174,11 @@ bool ShipsListHandler::noneMaxNumSet() const
 
     bool result = false;
 
-    if (!(destroyerMaxNumSet   &&
-         submarineMaxNumSet  &&
-         cruiserMaxNumSet    &&
-         battleshipMaxNumSet &&
-         carrierMaxNumSet))
+    if (!destroyerMaxNumSet  &&
+        !submarineMaxNumSet  &&
+        !cruiserMaxNumSet    &&
+        !battleshipMaxNumSet &&
+        !carrierMaxNumSet)
     {
         result = true;
     }
@@ -193,11 +195,11 @@ bool ShipsListHandler::onlyFirstMaxNumSet() const
 
     bool result = false;
 
-    if (destroyerMaxNumSet   &&
-       !(submarineMaxNumSet  &&
-         cruiserMaxNumSet    &&
-         battleshipMaxNumSet &&
-         carrierMaxNumSet))
+    if (destroyerMaxNumSet  &&
+       !submarineMaxNumSet  &&
+       !cruiserMaxNumSet    &&
+       !battleshipMaxNumSet &&
+       !carrierMaxNumSet)
     {
         result = true;
     }
@@ -206,7 +208,7 @@ bool ShipsListHandler::onlyFirstMaxNumSet() const
 
 bool ShipsListHandler::onlyTwoFirstMaxNumSet() const
 {
-    const bool onlyFirstMaxNumSet = this->onlyFirstMaxNumSet();
+    const bool destroyerMaxNumSet = this->isMaxNumSet(name::DESTROYER);
     const bool submarineMaxNumSet = this->isMaxNumSet(name::SUBMARINE);
     const bool cruiserMaxNumSet = this->isMaxNumSet(name::CRUISER);
     const bool battleshipMaxNumSet = this->isMaxNumSet(name::BATTLESHIP);
@@ -214,11 +216,12 @@ bool ShipsListHandler::onlyTwoFirstMaxNumSet() const
 
     bool result = false;
 
-    if (onlyFirstMaxNumSet   &&
-        submarineMaxNumSet   &&
-       !(cruiserMaxNumSet    &&
-         battleshipMaxNumSet &&
-         carrierMaxNumSet))
+    if (destroyerMaxNumSet  &&
+        submarineMaxNumSet  &&
+       !cruiserMaxNumSet    &&
+       !battleshipMaxNumSet &&
+       !carrierMaxNumSet)
+
     {
         result = true;
     }
@@ -227,17 +230,19 @@ bool ShipsListHandler::onlyTwoFirstMaxNumSet() const
 
 bool ShipsListHandler::onlyThreeFirstMaxNumSet() const
 {
-    const bool onlyTwoFirstMaxNumSet = this->onlyTwoFirstMaxNumSet();
+    const bool destroyerMaxNumSet = this->isMaxNumSet(name::DESTROYER);
+    const bool submarineMaxNumSet = this->isMaxNumSet(name::SUBMARINE);
     const bool cruiserMaxNumSet = this->isMaxNumSet(name::CRUISER);
     const bool battleshipMaxNumSet = this->isMaxNumSet(name::BATTLESHIP);
     const bool carrierMaxNumSet = this->isMaxNumSet(name::CARRIER);
 
     bool result = false;
 
-    if (onlyTwoFirstMaxNumSet &&
-        cruiserMaxNumSet      &&
-       !(battleshipMaxNumSet  &&
-         carrierMaxNumSet))
+    if (destroyerMaxNumSet  &&
+        submarineMaxNumSet  &&
+        cruiserMaxNumSet    &&
+       !battleshipMaxNumSet &&
+       !carrierMaxNumSet)
     {
         result = true;
     }
@@ -246,15 +251,19 @@ bool ShipsListHandler::onlyThreeFirstMaxNumSet() const
 
 bool ShipsListHandler::onlyFourFirstMaxNumSet() const
 {
-    const bool onlyThreeFirstMaxNumSet = this->onlyThreeFirstMaxNumSet();
+    const bool destroyerMaxNumSet = this->isMaxNumSet(name::DESTROYER);
+    const bool submarineMaxNumSet = this->isMaxNumSet(name::SUBMARINE);
+    const bool cruiserMaxNumSet = this->isMaxNumSet(name::CRUISER);
     const bool battleshipMaxNumSet = this->isMaxNumSet(name::BATTLESHIP);
     const bool carrierMaxNumSet = this->isMaxNumSet(name::CARRIER);
 
     bool result = false;
 
-    if (onlyThreeFirstMaxNumSet &&
-        battleshipMaxNumSet     &&
-       !(carrierMaxNumSet))
+    if (destroyerMaxNumSet  &&
+        submarineMaxNumSet  &&
+        cruiserMaxNumSet    &&
+        battleshipMaxNumSet &&
+       !carrierMaxNumSet)
     {
         result = true;
     }
@@ -263,12 +272,18 @@ bool ShipsListHandler::onlyFourFirstMaxNumSet() const
 
 bool ShipsListHandler::allMaxNumSet() const
 {
-    const bool onlyFourFirstMaxNumSet = this->onlyFourFirstMaxNumSet();
+    const bool destroyerMaxNumSet = this->isMaxNumSet(name::DESTROYER);
+    const bool submarineMaxNumSet = this->isMaxNumSet(name::SUBMARINE);
+    const bool cruiserMaxNumSet = this->isMaxNumSet(name::CRUISER);
+    const bool battleshipMaxNumSet = this->isMaxNumSet(name::BATTLESHIP);
     const bool carrierMaxNumSet = this->isMaxNumSet(name::CARRIER);
 
     bool result = false;
 
-    if (onlyFourFirstMaxNumSet &&
+    if (destroyerMaxNumSet  &&
+        submarineMaxNumSet  &&
+        cruiserMaxNumSet    &&
+        battleshipMaxNumSet &&
         carrierMaxNumSet)
     {
         result = true;

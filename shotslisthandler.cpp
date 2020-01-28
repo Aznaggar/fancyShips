@@ -18,7 +18,10 @@ void ShotsListHandler::onInputUpdate(const std::string& input)
 
 void ShotsListHandler::onGameStateUpdate(const game::state& gameState)
 {
-    //@TODO
+    if (gameState == game::state::BATTLE)
+    {
+        //@TODO
+    }
 }
 
 void ShotsListHandler::print(const state& gameState) const

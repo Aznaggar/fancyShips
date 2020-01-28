@@ -3,7 +3,12 @@
 MsgHandler::MsgHandler(const std::string& msg,
                        ShipsListHandlerPtr shipsListHandlerPtr) :
     msg(msg),
-    shipsListHandlerPtr(shipsListHandlerPtr) {}
+    shipsListHandlerPtr(shipsListHandlerPtr)
+{
+    std::string initMsg = game::message::CONFIG_STATE;
+    this->setConfigMsg(initMsg, type::name::DESTROYER);
+    this->msg = initMsg;
+}
 
 void MsgHandler::print(const state& gameState) const
 {
@@ -61,6 +66,7 @@ void MsgHandler::onGameStateUpdate(const game::state& gameState)
     default:
         break;
     }
+    this->msg = msg;
 }
 
 void MsgHandler::setConfigMsg(std::string& msg, std::string typeName)
